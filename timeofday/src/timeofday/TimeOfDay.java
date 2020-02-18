@@ -17,13 +17,13 @@ public class TimeOfDay {
 	 * @invar minutesSinceMidnight is between 0 (inclusive) and 24*60 (exclusive)
 	 * 		| 0 <= minutesSinceMidnight && minutesSinceMidnight < 24*60
 	 */
-	private static int minutesSinceMidnight;
+	private int minutesSinceMidnight;
 	
-	public static int getHours(TimeOfDay t) { 
+	public int getHours() { 
 		return minutesSinceMidnight / 60; 
 	}
 	
-	public static int getMinutes(TimeOfDay t) { 
+	public int getMinutes() { 
 		return minutesSinceMidnight % 60; 
 	}
 	
@@ -35,10 +35,10 @@ public class TimeOfDay {
 	 * @post This object's hours are equal to the given hours
 	 * 		| getHours() == hours
 	 * @post This object's minutes have remained unchanged
-	 * 		| getMinutes == old(getMinutes())
+	 * 		| getMinutes() == old(getMinutes())
 	 */
-	public static void setHours(TimeOfDay t, int hours) {
-		minutesSinceMidnight = hours*60 + getMinutes(t); 
+	public void setHours(int hours) {
+		minutesSinceMidnight = hours*60 + getMinutes(); 
 	}
 	
 	/**
@@ -51,7 +51,26 @@ public class TimeOfDay {
 	 *@post This object's hours have remained unchanged
 	 *		| getHours() == old(getHours())
 	 */
-	public static void setMinutes(TimeOfDay t, int minutes) {
-		minutesSinceMidnight = getHours(t) * 60 + minutes; 
+	public void setMinutes(int minutes) {
+		minutesSinceMidnight = getHours() * 60 + minutes; 
+	}
+	
+	/**
+	 * Initializes this instance with the given hours and minutes.
+	 * 
+	 * @pre The given hours are between 0 and 23
+	 * 		| 0 <= hours && hours <= 23
+	 * @pre The given minutes are between 0 and 59
+	 * 		| 0 <= minutes && minutes <= 59
+	 * 
+	 * @post This instance's hours are equal to the given hours
+	 * 		| getHours() == hours
+	 * 
+	 * @post This instance's minutes are equal to the given minutes
+	 * 		|getMinutes() == minutes
+	 * 
+	 */
+	public TimeOfDay(int hours, int minutes) {
+		minutesSinceMidnight = hours * 60 + minutes;
 	}
 }
